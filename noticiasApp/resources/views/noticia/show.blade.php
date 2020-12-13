@@ -32,7 +32,7 @@
             <h5 id="captchaLabel">Resuelve esta cuenta: </h5>
             <input type="number" class="form-control" placeholder="Resultado" name ="resultado" id="captcha"><br>
             <div class="botones">
-                <button type="submit">Comentar</button>
+                <button type="submit">Comentar</button><br><br><br><br>
             </div>
             
         </form>
@@ -40,9 +40,10 @@
     
     <div class="form-group">
         @foreach($comentarios as $comentario)
-            <textarea class="form-control" rows="3" name="texto" readonly>{{ $comentario->texto }}</textarea><br>
-            <input type="text" class="form-control" value="{{ $comentario->correo }}" name ="correo" readonly>
-            <input type="text" class="form-control" value="{{ $comentario->fecha }}" name ="fecha" readonly>
+            <label><b>{{ $comentario->correo }}</b></label>
+            <p>{{ $comentario->texto }}</p>
+            <label>{{ $comentario->fecha }}</label>
+            <br><br><br>
         @endforeach
     </div>
     
@@ -54,8 +55,8 @@
         window.onload = function(){
             n1 = Math.floor((Math.random() * 10));
             n2 = Math.floor((Math.random() * 10));
-            resultado = n1 + n2;
-            captchaLabel.innerText = '¿Cuánto es ' + n1 + ' + ' + n2 + '?';
+            resultado = n1 * n2;
+            captchaLabel.innerText = '¿Cuánto es ' + n1 + ' x ' + n2 + '?';
         }
         
         var form = document.getElementById("formComentarios");
@@ -66,7 +67,7 @@
         
         function checkCaptcha(){
             if(resultado != captcha.value){
-                alert("Mal!");
+                alert("¡Error al verificar!");
                 return;
             }else{
                 form.submit();
